@@ -1,6 +1,18 @@
-public class DoublyLL<T> implements List<T> {
+public class DoublyLL<T> extends CheckBounds<T> {
+
+    private class Node {
+        T data;
+        Node prev;
+        Node next;
+
+        Node(T data) {
+            this.data = data;
+            prev = null;
+            next = null;
+        }
+    }
+
     private Node head;
-    private int size;
 
     public DoublyLL() {
         head = null;
@@ -29,10 +41,8 @@ public class DoublyLL<T> implements List<T> {
     }
 
     @Override
-    public void add(int pos, T item) {
-        if (pos < 0 || pos > size) { // insert at size allowed
-            throw new IndexOutOfBoundsException("Invalid position: " + pos);
-        }
+    public void add(int pos, T item) throws IndexOutOfBoundsException {
+        checkBounds(pos, true); //insert at size allowed
 
         Node node = new Node(item);
 
@@ -59,10 +69,8 @@ public class DoublyLL<T> implements List<T> {
     }
 
     @Override
-    public T remove(int pos) {
-        if (pos < 0 || pos >= size) {
-            throw new IndexOutOfBoundsException("Invalid position: " + pos);
-        }
+    public T remove(int pos) throws IndexOutOfBoundsException {
+        checkBounds(pos, false);
 
         Node curr = head;
 
@@ -94,32 +102,13 @@ public class DoublyLL<T> implements List<T> {
     }
 
     @Override
-    public T get(int pos) {
-        if (pos < 0 || pos >= size) {
-            throw new IndexOutOfBoundsException("Invalid position: " + pos);
-        }
+    public T get(int pos) throws IndexOutOfBoundsException {
+        checkBounds(pos, false);
 
         Node curr = head;
         for (int i = 0; i < pos; i++) {
             curr = curr.next;
         }
         return curr.data;
-    }
-
-    @Override
-    public int size() {
-        return size;
-    }
-
-    private class Node {
-        T data;
-        Node prev;
-        Node next;
-
-        Node(T data) {
-            this.data = data;
-            prev = null;
-            next = null;
-        }
     }
 }

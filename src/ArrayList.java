@@ -1,6 +1,5 @@
-public class ArrayList<T> implements List<T> {
+public class ArrayList<T> extends CheckBounds<T> {
     private T[] arr;
-    private int size;
 
     public ArrayList() {
         arr = (T[]) new Object[10];
@@ -8,7 +7,7 @@ public class ArrayList<T> implements List<T> {
     }
 
     @Override
-    public boolean add(T item) {
+    public boolean add(T item)  {
         if (size == arr.length) {
             growArray();
         }
@@ -17,10 +16,9 @@ public class ArrayList<T> implements List<T> {
     }
 
     @Override
-    public void add(int pos, T item) {
-        if (pos < 0 || pos > size) {
-            throw new IndexOutOfBoundsException("Invalid position: " + pos);
-        }
+    public void add(int pos, T item) throws IndexOutOfBoundsException {
+        checkBounds(pos, true);
+
         if (size == arr.length) {
             growArray();
         }
@@ -33,10 +31,9 @@ public class ArrayList<T> implements List<T> {
     }
 
     @Override
-    public T remove(int pos)  {
-        if (pos < 0 || pos >= size) {
-            throw new IndexOutOfBoundsException("Invalid position: " + pos);
-        }
+    public T remove(int pos) throws IndexOutOfBoundsException {
+        checkBounds(pos, false);
+
         T removedItem = arr[pos];
         // Shift elements to the left
         for (int i = pos; i < size - 1; i++) {
@@ -47,17 +44,11 @@ public class ArrayList<T> implements List<T> {
     }
 
     @Override
-    public T get(int pos) {
-        if (pos < 0 || pos >= size) {
-            throw new IndexOutOfBoundsException("Invalid position: " + pos);
-        }
+    public T get(int pos) throws IndexOutOfBoundsException {
+        checkBounds(pos, false);
         return arr[pos];
     }
 
-    @Override
-    public int size() {
-        return size;
-    }
 
     private void growArray() {
         T[] newArr = (T[]) new Object[arr.length * 3 / 2 + 1];

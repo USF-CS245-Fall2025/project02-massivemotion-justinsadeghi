@@ -6,16 +6,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class MassiveMotion extends JPanel implements ActionListener {
+    public class MassiveMotion extends JPanel implements ActionListener {
 
-    private Timer tm;
-    private List<CelestialObject> celestialObjects;
-    private Properties props;
+        private Timer tm;
+        private List<CelestialObject> celestialObjects;
+        private Properties props;
 
-    private double genX, genY;
-    private int bodySize, bodyVelocity;
-    private int winX, winY;
-
+        private double genX, genY;
+        private int bodySize, bodyVelocity;
+        private int winX, winY;
 
     /**
      * Creates the star simulation using the config from a txt file

@@ -1,6 +1,16 @@
-public class DummyHeadLL<T> implements List<T> {
+public class DummyHeadLL<T> extends CheckBounds<T> {
+
+    private class Node {
+        T data;
+        Node next;
+
+        public Node(T data) {
+            this.data = data;
+            next = null;
+        }
+    }
+
     private Node head; // dummy head
-    private int size;
 
     public DummyHeadLL() {
         head = new Node(null); // dummy node
@@ -19,10 +29,8 @@ public class DummyHeadLL<T> implements List<T> {
     }
 
     @Override
-    public void add(int pos, T item) {
-        if (pos < 0 || pos > size) {
-            throw new IndexOutOfBoundsException("Invalid position: " + pos);
-        }
+    public void add(int pos, T item) throws IndexOutOfBoundsException {
+        checkBounds(pos, true);
 
         Node prev = head;
         for (int i = 0; i < pos; i++) {
@@ -36,10 +44,8 @@ public class DummyHeadLL<T> implements List<T> {
     }
 
     @Override
-    public T remove(int pos) {
-        if (pos < 0 || pos >= size) {
-            throw new IndexOutOfBoundsException("Invalid position: " + pos);
-        }
+    public T remove(int pos) throws IndexOutOfBoundsException {
+        checkBounds(pos, false);
 
         Node prev = head;
         for (int i = 0; i < pos; i++) {
@@ -53,30 +59,13 @@ public class DummyHeadLL<T> implements List<T> {
     }
 
     @Override
-    public T get(int pos)  {
-        if (pos < 0 || pos >= size) {
-            throw new IndexOutOfBoundsException("Invalid position: " + pos);
-        }
+    public T get(int pos) throws IndexOutOfBoundsException {
+        checkBounds(pos, false);
 
         Node curr = head.next; // skip dummy node
         for (int i = 0; i < pos; i++) {
             curr = curr.next;
         }
         return curr.data;
-    }
-
-    @Override
-    public int size() {
-        return size;
-    }
-
-    private class Node {
-        T data;
-        Node next;
-
-        public Node(T data) {
-            this.data = data;
-            next = null;
-        }
     }
 }
