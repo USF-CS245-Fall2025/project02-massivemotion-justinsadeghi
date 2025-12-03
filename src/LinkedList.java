@@ -1,3 +1,9 @@
+/**
+ * Singly Linked list
+ * Basic linked list with each node only having a next pointer, traversal can only be forward
+ * Checking bounds of an index and keeping track of the size for a list is accounted for by CheckBounds
+ * @param <T> type of element stored in the list
+ */
 public class LinkedList<T> extends CheckBounds<T> {
 
     private class Node {

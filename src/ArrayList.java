@@ -1,3 +1,9 @@
+/**
+ * ArrayList
+ * Uses an array to store elements, resizing when necessary
+ * Checking bounds of an index and keeping track of the size for a list is accounted for by CheckBounds
+ * @param <T> type of element stored in the list
+ */
 public class ArrayList<T> extends CheckBounds<T> {
     private T[] arr;
 

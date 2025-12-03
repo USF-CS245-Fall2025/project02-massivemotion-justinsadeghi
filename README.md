@@ -21,14 +21,16 @@ This is important since the window is constantly updating, resulting in the get(
 
 [Dummy Head Linked List](https://drive.google.com/file/d/1GQj-j14RJxg-VKV54kA84_3OXxOzmgSw/view?usp=drive_link)
 
-### Updates
--Interface methods throw exceptions
+### Abstract Class Design
+The abstract class CheckBounds allows for methods that can be reused across
+all list implementations. Index bounds checking was made to handle
+any out of bounds exceptions and that operations are performed within valid
+indices. Size tracking is also included as it is needed in order to 
+determine the size for the upper limit in checking bounds. the size method allows
+for all implementations to access the list size. This prevents
+repetitive code in every individual class. 
 
--Implemented an Abstract class with shared method for checking lower and upper bounds of a list
-
-
--All list implementations now extend the abstract class which has the size variable as well
-
-
--Abstract class inherits List interface
-
+Regarding how
+this affects the rest of the code, the CheckBounds class implements the List interface
+and all the list variants extend this abstract class. As a result, all list varaints
+don't need their own size variable since it's inherited.

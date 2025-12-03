@@ -1,3 +1,9 @@
+/**
+ * Doubly Linked List
+ * Each node has prev and next pointers, allowing for traversal in both directions
+ * Checking bounds of an index and keeping track of the size for a list is accounted for by CheckBounds
+ * @param <T> type of element stored in the list
+ */
 public class DoublyLL<T> extends CheckBounds<T> {
 
     private class Node {
